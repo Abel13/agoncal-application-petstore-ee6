@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Antonio Goncalves
  *         http://www.antoniogoncalves.org
@@ -25,22 +28,38 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id;
+    
     @Column(name = "order_date", updatable = false)
     @Temporal(TemporalType.DATE)
+    @Getter    
     private Date orderDate;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_fk", nullable = false)
+    @Getter
+    @Setter
     private Customer customer;
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "t_order_order_line",
             joinColumns = {@JoinColumn(name = "order_fk")},
             inverseJoinColumns = {@JoinColumn(name = "order_line_fk")})
+    @Getter
+    @Setter
     private List<OrderLine> orderLines;
+            
     @Embedded
+    @Getter
+    @Setter
     private Address deliveryAddress;
+    
     @Embedded
+    @Getter
+    @Setter
     private CreditCard creditCard = new CreditCard();
+    
 
     // ======================================
     // =             Constants              =
@@ -86,50 +105,6 @@ public class Order {
         }
 
         return total;
-    }
-
-    // ======================================
-    // =         Getters & setters          =
-    // ======================================
-
-    public Long getId() {
-        return id;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-    public Address getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(Address deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
     }
 
     public String getCreditCardNumber() {
