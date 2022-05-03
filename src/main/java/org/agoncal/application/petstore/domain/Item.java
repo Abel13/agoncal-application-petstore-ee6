@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Antonio Goncalves
@@ -25,6 +26,7 @@ import lombok.Setter;
         @NamedQuery(name = Item.FIND_ALL, query = "SELECT i FROM Item i")
 })
 @XmlRootElement
+@ToString(includeFieldNames = true)
 public class Item {
 
     // ======================================
@@ -48,7 +50,11 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "product_fk", nullable = false)
     @XmlTransient
-    @Getter @Setter private Product product;
+    @Getter
+    @Setter
+    @ToString.Exclude
+    private Product product;
+    
 
     // ======================================
     // =             Constants              =
@@ -95,18 +101,5 @@ public class Item {
         int result = name.hashCode();
         result = 31 * result + imagePath.hashCode();
         return result;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Item");
-        sb.append("{id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", unitCost=").append(unitCost).append('\'');
-        sb.append(", imagePath='").append(imagePath).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }
