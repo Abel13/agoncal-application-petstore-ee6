@@ -50,7 +50,7 @@ public class Order {
             inverseJoinColumns = {@JoinColumn(name = "order_line_fk")})
     @Getter
     @Setter
-    private List<OrderLine> orderLines;
+    @ToString.Exclude private List<OrderLine> orderLines;
             
     @Embedded
     @Getter
