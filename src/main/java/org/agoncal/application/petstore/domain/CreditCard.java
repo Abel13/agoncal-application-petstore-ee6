@@ -7,6 +7,9 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author Antonio Goncalves
  *         http://www.antoniogoncalves.org
@@ -23,15 +26,15 @@ public class CreditCard {
     @Column(name = "credit_card_number", length = 30)
     @NotNull
     @Size(min = 1, max = 30)
-    private String creditCardNumber;
+    @Getter @Setter private String creditCardNumber;
     @Column(name = "credit_card_type")
     @NotNull
     @Enumerated(EnumType.STRING)
-    private CreditCardType creditCardType;
+    @Getter @Setter private CreditCardType creditCardType;
     @Column(name = "credit_card_expiry_date", length = 5)
     @NotNull
     @Size(min = 1, max = 5)
-    private String creditCardExpDate;
+    @Getter @Setter private String creditCardExpDate;
 
     // ======================================
     // =            Constructors            =
@@ -43,34 +46,6 @@ public class CreditCard {
     public CreditCard(String creditCardNumber, CreditCardType creditCardType, String creditCardExpDate) {
         this.creditCardNumber = creditCardNumber;
         this.creditCardType = creditCardType;
-        this.creditCardExpDate = creditCardExpDate;
-    }
-
-    // ======================================
-    // =         Getters & setters          =
-    // ======================================
-
-    public String getCreditCardNumber() {
-        return creditCardNumber;
-    }
-
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
-    }
-
-    public CreditCardType getCreditCardType() {
-        return creditCardType;
-    }
-
-    public void setCreditCardType(CreditCardType creditCardType) {
-        this.creditCardType = creditCardType;
-    }
-
-    public String getCreditCardExpDate() {
-        return creditCardExpDate;
-    }
-
-    public void setCreditCardExpDate(String creditCardExpDate) {
         this.creditCardExpDate = creditCardExpDate;
     }
 
