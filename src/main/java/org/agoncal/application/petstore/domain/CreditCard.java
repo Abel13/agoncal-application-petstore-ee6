@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Antonio Goncalves
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 
 @Embeddable
+@ToString(includeFieldNames = true)
 public class CreditCard {
 
     // ======================================
@@ -68,16 +70,5 @@ public class CreditCard {
     @Override
     public int hashCode() {
         return creditCardNumber.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("CreditCard");
-        sb.append("{creditCardNumber='").append(creditCardNumber).append('\'');
-        sb.append(", creditCardType=").append(creditCardType);
-        sb.append(", creditCardExpDate='").append(creditCardExpDate).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }
