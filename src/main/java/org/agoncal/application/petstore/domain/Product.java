@@ -10,6 +10,7 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Antonio Goncalves
@@ -25,6 +26,7 @@ import lombok.Setter;
         @NamedQuery(name = Product.FIND_ALL, query = "SELECT p FROM Product p")
 })
 @XmlRootElement
+@ToString(includeFieldNames = true)
 public class Product {
 
     // ======================================
@@ -60,7 +62,7 @@ public class Product {
     @XmlTransient
     @Getter
     @Setter
-    private List<Item> items;
+    @ToString.Exclude private List<Item> items;
     
     // ======================================
     // =             Constants              =
@@ -107,16 +109,5 @@ public class Product {
     @Override
     public int hashCode() {
         return name.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Product");
-        sb.append("{id=").append(id);
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 }
