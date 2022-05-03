@@ -48,7 +48,7 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @OrderBy("name ASC")
     @XmlTransient
-    @Getter @Setter private List<Product> products;
+    @ToString.Exclude @Getter @Setter private List<Product> products;
 
     // ======================================
     // =             Constants              =
